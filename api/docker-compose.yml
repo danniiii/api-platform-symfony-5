@@ -4,7 +4,7 @@ services:
   symfony-api-platform-web:
     container_name: symfony-api-platform-web
     build:
-      context: ./docker/nginx
+      context: docker/nginx
       args:
         UID: $U_ID
     ports:
@@ -22,16 +22,22 @@ services:
       context: docker/php
       args:
         UID: $U_ID
+    ###> XDEBUG 3 ###
+    # Use your client IP here
+    # Linux: run "ip a | grep docker0"
+    # Windows (with WSL2): Run "grep nameserver /etc/resolv.conf  | cut -d ' ' -f2"
+    # MacOS: host.docker.internal
+    ###< XDEBUG 3 ###
     environment:
+      XDEBUG_CLIENT_HOST: 172.17.0.1
+      XDEBUG_CLIENT_PORT: 9003
       PHP_IDE_CONFIG: serverName=Docker
-      PHP_XDEBUG_ENABLED: 1
-      XDEBUG_CONFIG: remote_host=172.17.0.1 remote_port=9005 # Linux users
-    #      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9005 # MacOS users
     volumes:
       - ./:/appdata/www
-      - ./docker/php/xdebug-linux.ini:/usr/local/etc/php/conf.d/xdebug.ini
-      #      - ./docker/php/xdebug-macos.ini:/usr/local/etc/php/conf.d/xdebug.ini
-      - ~/.ssh/id_rsa:/home/appuser/.ssh/id_rsa
+          #      - ./docker/php/xdebug-linux.ini:/usr/local/etc/php/conf.d/xdebug.ini
+          #      - ./docker/php/xdebug-macos.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ~/.ssh:/home/appuser/.ssh
     depends_on:
       - symfony-api-platform-db
     networks:
@@ -53,7 +59,25 @@ services:
     networks:
       - symfony-api-platform-network
 
+###> doctrine/doctrine-bundle ###
+  database:
+    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
+      POSTGRES_USER: ${POSTGRES_USER:-symfony}
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/postgresql/data:rw
+###< doctrine/doctrine-bundle ###
+
 volumes:
+
+###> doctrine/doctrine-bundle ###
+  db-data:
+###< doctrine/doctrine-bundle ###
   symfony-api-platform-db-data:
 
 networks:
