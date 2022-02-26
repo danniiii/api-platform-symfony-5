@@ -16,9 +16,7 @@ use Doctrine\Persistence\Mapping\MappingException;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 
-/**
- * @ORM\Embedded
- */
+
 abstract class BaseRepository
 {
 
