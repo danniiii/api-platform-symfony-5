@@ -1,0 +1,21 @@
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $mailerDefaultSender: '%env(string:MAILER_DEFAULT_SENDER)%' #Default global variable to use in MailerService
+            $host: '%env(string:HOST)%'
+
+    Mailer\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    Mailer\Controller\:
+        resource: '../src/Controller'
+        tags: [ 'controller.service_arguments' ]

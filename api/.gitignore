@@ -22,3 +22,9 @@
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+
+###> Other files and folders ###
+docker-compose.yml
+.idea
+###< Other files and folders ###
+
