@@ -55,3 +55,6 @@ generate-ssh-keys: ## Generates SSH keys for the JWT library
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BACKEND} mkdir -p config/jwt
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BACKEND} openssl genrsa -passout pass:767b453a97ac019714eb7ccbce781d16 -out config/jwt/private.pem -aes256 4096
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BACKEND} openssl rsa -pubout -passin pass:767b453a97ac019714eb7ccbce781d16 -in config/jwt/private.pem -out config/jwt/public.pem
+
+regenerate-ssh-keys: ## Generates SSH keys for the JWT library
+	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BACKEND} bin/console lexik:jwt:generate-keypair --overwrite --quiet
