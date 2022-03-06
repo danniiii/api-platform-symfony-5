@@ -5,8 +5,9 @@ namespace Mailer\Service\Mailer;
 /*
  * Routes of our frontend client
  */
-class ClientRoute
+abstract class ClientRoute
 {
 
     public const ACTIVATE_ACCOUNT = '/activate_account';
+    public const RESET_PASSWORD = '/reset_password';
 }

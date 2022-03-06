@@ -7,6 +7,7 @@ namespace App\Service\Password;
 use App\Exceptions\Password\PasswordException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class EncoderService
@@ -20,17 +21,16 @@ class EncoderService
         $this->userPasswordHasher = $userPasswordHasher;
     }
 
-    public function generateEncodedPassword(UserInterface $user, string $password): string
+    public function generateEncodedPassword(PasswordAuthenticatedUserInterface $user, string $password): string
     {
         if(self::MINIMUN_LENGTH > strlen($password)){
             throw PasswordException::invalidLength();
         }
-//        return $this->userPasswordEncoder->encodePassword($user, $password);
         return $this->userPasswordHasher->hashPassword($user, $password);
     }
 
     public function isValidPassword(User $user, string $oldPassword): bool
     {
-        return $this->userPasswordEncoder->isPasswordValid($user, $oldPassword);
+        return $this->userPasswordHasher->isPasswordValid($user,$oldPassword);
     }
 }

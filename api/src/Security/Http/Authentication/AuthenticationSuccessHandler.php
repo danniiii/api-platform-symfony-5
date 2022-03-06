@@ -22,7 +22,6 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
 
     public function __construct(UserRepository $userRepository, JWTTokenManagerInterface $JWTTokenManager)
     {
-
         $this->userRepository = $userRepository;
         $this->JWTTokenManager = $JWTTokenManager;
     }
