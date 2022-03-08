@@ -8,7 +8,6 @@ class UserNotFoundException extends NotFoundHttpException
 {
     private const MESSAGE = 'User with email %s not found';
 
-
     public static function fromId(string $id): self
     {
         throw new self(sprintf('User with id %s not found', $id));
@@ -29,5 +28,3 @@ class UserNotFoundException extends NotFoundHttpException
         throw new self(sprintf('User with id %s and resetPasswordToken %s not found', $id, $resetPasswordToken));
     }
 }
-
-

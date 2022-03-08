@@ -17,5 +17,4 @@ class JWTCreatedListener
 
         $event->setData($payload);
     }
-
 }

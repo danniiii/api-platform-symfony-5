@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ResetPassword
 {
-
     private ResetPasswordService $resetPasswordService;
 
     public function __construct(ResetPasswordService $resetPasswordService)

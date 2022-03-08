@@ -22,3 +22,9 @@ framework:
             'App\Messenger\Message\UserRegisteredMessage': amqp_user
             'App\Messenger\Message\RequestResetPasswordMessage': amqp_user
 
+when@test:
+    # config/packages/test/messenger.yaml
+    framework:
+        messenger:
+            transports:
+                amqp_user: 'in-memory://'

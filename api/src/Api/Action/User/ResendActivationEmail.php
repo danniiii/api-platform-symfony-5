@@ -11,12 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ResendActivationEmail
 {
-
     private ResendActivationEmailService $resendActivationEmail;
 
     public function __construct(ResendActivationEmailService $resendActivationEmail)
     {
-
         $this->resendActivationEmail = $resendActivationEmail;
     }
 

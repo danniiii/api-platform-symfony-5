@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
-
     private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
@@ -24,14 +23,14 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
     {
         try {
             return $this->userRepository->findOneByEmailOrFail($username);
-        } catch (UserNotFoundException $e){
+        } catch (UserNotFoundException $e) {
             throw new UsernameNotFoundException(sprintf('User %s Not found by email'), $username);
         }
     }
 
     public function refreshUser(UserInterface $user): UserInterface
     {
-        if(!$user instanceof User){
+        if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of % are not supported'), get_class($user));
         }
 

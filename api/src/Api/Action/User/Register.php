@@ -9,7 +9,6 @@ use App\Service\Request\RequestService;
 use App\Service\User\UserRegisterService;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class Register
 {
     private UserRegisterService $userRegisterService;

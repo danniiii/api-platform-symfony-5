@@ -12,5 +12,4 @@ class UserIsNotActiveException extends ConflictHttpException
     {
         throw new self(sprintf(self::MESSAGE, $email));
     }
-
 }

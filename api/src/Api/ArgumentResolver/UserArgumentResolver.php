@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class UserArgumentResolver implements ArgumentValueResolverInterface
 {
-
     private TokenStorageInterface $tokenStorage;
     private UserRepository $userRepository;
 
@@ -24,12 +23,14 @@ class UserArgumentResolver implements ArgumentValueResolverInterface
 
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        if(User::class !== $argument->getType())
+        if (User::class !== $argument->getType()) {
             return false;
+        }
         $token = $this->tokenStorage->getToken();
 
-        if(!$token instanceof TokenInterface)
+        if (!$token instanceof TokenInterface) {
             return false;
+        }
 
         return $token->getUser() instanceof User;
     }

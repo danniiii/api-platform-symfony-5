@@ -10,8 +10,6 @@ use App\Messenger\Message\UserRegisteredMessage;
 use App\Messenger\RoutingKey;
 use App\Repository\UserRepository;
 use App\Service\Password\EncoderService;
-use App\Service\Request\RequestService;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp;
 use Symfony\Component\Messenger\MessageBusInterface;
 

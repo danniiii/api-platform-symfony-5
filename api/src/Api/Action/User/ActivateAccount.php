@@ -11,12 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ActivateAccount
 {
-
     private ActivateAccountService $activateAccountService;
 
     public function __construct(ActivateAccountService $activateAccountService)
     {
-
         $this->activateAccountService = $activateAccountService;
     }
 
@@ -26,7 +24,6 @@ class ActivateAccount
      */
     public function __invoke(Request $request, $id): User
     {
-        return $this->activateAccountService->activate(RequestService::getField($request,'token'), $id);
-
+        return $this->activateAccountService->activate(RequestService::getField($request, 'token'), $id);
     }
 }

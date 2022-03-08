@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RequestResetPassword
 {
-
     private RequestResetPasswordService $requestResetPasswordService;
 
     public function __construct(RequestResetPasswordService $requestResetPasswordService)
@@ -26,6 +25,7 @@ class RequestResetPassword
     public function __invoke(Request $request): JsonResponse
     {
         $this->requestResetPasswordService->send(RequestService::getField($request, 'email'));
+
         return new JsonResponse(['message' => 'reset password email sent']);
     }
 }

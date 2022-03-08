@@ -9,45 +9,48 @@ use Doctrine\ORM\ORMException;
 
 class UserRepository extends BaseRepository
 {
-
-    /**
-     * @return string
-     */
     protected static function entityClass(): string
     {
         return User::class;
     }
 
-
     public function findOneByIdOrFail(string $id): User
     {
         $user = $this->objectRepository->findOneBy(['id' => $id]);
-        if($user === null)
+        if (null === $user) {
             throw UserNotFoundException::fromId($id);
+        }
+
         return $user;
     }
 
     public function findOneByEmailOrFail(string $email): User
     {
         $user = $this->objectRepository->findOneBy(['email' => $email]);
-        if($user === null)
+        if (null === $user) {
             throw UserNotFoundException::fromEmail($email);
+        }
+
         return $user;
     }
 
-   public function findOneInactiveByIdAndTokenOrFail(string $id, string $token): User
+    public function findOneInactiveByIdAndTokenOrFail(string $id, string $token): User
     {
         $user = $this->objectRepository->findOneBy(['id' => $id, 'token' => $token, 'active' => false]);
-        if($user === null)
-            throw UserNotFoundException::fromIdAndToken($id,$token);
+        if (null === $user) {
+            throw UserNotFoundException::fromIdAndToken($id, $token);
+        }
+
         return $user;
     }
 
     public function findOneByIdAndResetPasswordTokenOrFail(string $id, string $resetPasswordToken): User
     {
         $user = $this->objectRepository->findOneBy(['id' => $id, 'resetPasswordToken' => $resetPasswordToken, 'active' => true]);
-        if($user === null)
+        if (null === $user) {
             UserNotFoundException::fromIdAndResetPasswordToken($id, $resetPasswordToken);
+        }
+
         return $user;
     }
 
