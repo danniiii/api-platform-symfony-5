@@ -22,11 +22,12 @@ class ChangePassword
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function __invoke(Request $request, User $user): User
+    public function __invoke(Request $request, string $id): User
     {
         return $this->changePasswordService->changePassword(
+            $id,
             RequestService::getField($request, 'oldPassword'),
-            RequestService::getField($request, 'newPassword'),
-            $user->getId());
+            RequestService::getField($request, 'newPassword')
+        );
     }
 }

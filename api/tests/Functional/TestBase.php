@@ -68,23 +68,25 @@ class TestBase extends WebTestCase
         return json_decode($response->getContent(), true);
     }
 
+    /**
+     * @return false|mixed
+     * @throws Exception
+     */
+   protected function getPedroId()
+    {
+        return $this->initDbConnection()->executeQuery('SELECT id FROM user WHERE email = "pedro@api.com"')->fetchFirstColumn()[0];
+    }
+
     protected function initDbConnection(): Connection
     {
         return $this->getContainer()->get('doctrine')->getConnection();
     }
 
     /**
+     * @return false|mixed
      * @throws Exception
      */
-    protected function getPeterId(): array
-    {
-        return $this->initDbConnection()->executeQuery('SELECT id FROM user WHERE email = "peter@api.com"')->fetchFirstColumn();
-    }
-
-    /**
-     * @throws Exception
-     */
-    protected function getBrianId(): array
+    protected function getBrianId()
     {
         return $this->initDbConnection()->executeQuery('SELECT id FROM user WHERE email = "brian@api.com"')->fetchFirstColumn();
     }

@@ -6,6 +6,7 @@ namespace App\Service\User;
 
 use App\Entity\User;
 use App\Exception\User\UserAlreadyExistException;
+use App\Exceptions\User\UserAlreadyExistsException;
 use App\Messenger\Message\UserRegisteredMessage;
 use App\Messenger\RoutingKey;
 use App\Repository\UserRepository;
@@ -34,7 +35,7 @@ class UserRegisterService
         try {
             $this->userRepository->save($user);
         } catch (\Exception $exception) {
-            throw UserAlreadyExistException::fromEmail($email);
+            throw UserAlreadyExistsException::fromEmail($email);
         }
 
         //Once the user was saved, send the message to rabbit queue

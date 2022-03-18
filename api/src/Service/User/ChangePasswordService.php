@@ -24,7 +24,7 @@ class ChangePasswordService
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function changePassword(string $oldPassword, string $newPassword, string $userId): User
+    public function changePassword(string $userId, string $oldPassword, string $newPassword): User
     {
         $user = $this->userRepository->findOneByIdOrFail($userId);
 
