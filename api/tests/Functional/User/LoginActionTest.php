@@ -8,12 +8,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LoginActionTest extends UserTestBase
 {
-
     public function testLogin(): void
     {
         $payload = [
-            'username'=>'pedro@api.com',
-            'password'=>'password'
+            'username' => 'pedro@api.com',
+            'password' => 'password',
         ];
 
         self::$pedro->request('POST', sprintf('%s/login_check', $this->endpoint), [], [], [], json_encode($payload));
@@ -22,7 +21,6 @@ class LoginActionTest extends UserTestBase
 
         $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
         $this->assertInstanceOf(JWTAuthenticationSuccessResponse::class, $response);
-
     }
 
     public function testLoginWithInvalidCredentials(): void

@@ -2,8 +2,8 @@
 
 namespace App\Tests\Functional\User;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use function sprintf;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RegisterActionTest extends UserTestBase
 {

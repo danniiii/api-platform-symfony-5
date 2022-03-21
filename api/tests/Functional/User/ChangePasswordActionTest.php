@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ChangePasswordActionTest extends UserTestBase
 {
-
     public function testChangePassword(): void
     {
         $payload = [

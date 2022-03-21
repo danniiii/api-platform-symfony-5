@@ -11,7 +11,6 @@ use Symfony\Component\Uid\Uuid;
 
 class ActivateAccountServiceTest extends UserServiceTestBase
 {
-
     private ActivateAccountService $service;
 
     public function setUp(): void

@@ -14,5 +14,4 @@ class UserTestBase extends TestBase
 
         $this->endpoint = '/api/v1/users';
     }
-
 }

@@ -47,7 +47,7 @@ class ResetPasswordServiceTest extends UserServiceTestBase
             ->with($user->getId(), $resetPasswordToken)
             ->willThrowException(new UserNotFoundException());
 
-  //      $this->expectException(UserNotFoundException::class);
+        //      $this->expectException(UserNotFoundException::class);
 
         $this->service->reset($user->getId(), $resetPasswordToken, $password);
     }

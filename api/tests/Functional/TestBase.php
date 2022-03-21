@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class TestBase extends WebTestCase
 {
     use FixturesTrait; //charge false data
@@ -23,7 +22,7 @@ class TestBase extends WebTestCase
 
     protected function setUp(): void
     {
-        if (self::$client === null) {
+        if (null === self::$client) {
             self::$client = static::createClient();
             self::$client->setServerParameters([
                 'CONTENT_TYPE' => 'application/json',
@@ -31,17 +30,17 @@ class TestBase extends WebTestCase
             ]);
         }
 
-        if(self::$pedro === null){
+        if (null === self::$pedro) {
             self::$pedro = clone self::$client;
             $this->createAuthenticatedUser(self::$pedro, 'pedro@api.com');
         }
 
-        if(self::$brian === null){
+        if (null === self::$brian) {
             self::$brian = clone self::$client;
             $this->createAuthenticatedUser(self::$brian, 'brian@api.com');
         }
 
-        if(self::$javier === null){
+        if (null === self::$javier) {
             self::$javier = clone self::$client;
             $this->createAuthenticatedUser(self::$javier, 'javier@api.com');
         }
@@ -60,7 +59,6 @@ class TestBase extends WebTestCase
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/ld+json',
         ]);
-
     }
 
     protected function getResponseData(Response $response): array
@@ -70,9 +68,10 @@ class TestBase extends WebTestCase
 
     /**
      * @return false|mixed
+     *
      * @throws Exception
      */
-   protected function getPedroId()
+    protected function getPedroId()
     {
         return $this->initDbConnection()->executeQuery('SELECT id FROM user WHERE email = "pedro@api.com"')->fetchFirstColumn()[0];
     }
@@ -84,6 +83,7 @@ class TestBase extends WebTestCase
 
     /**
      * @return false|mixed
+     *
      * @throws Exception
      */
     protected function getBrianId()
