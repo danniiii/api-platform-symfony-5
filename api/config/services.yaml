@@ -7,6 +7,9 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $mediaPath: '%env(resolve:SUBDOMAIN)%'
+            $facebookClientId:     '%env(resolve:FACEBOOK_CLIENT)%'
+            $facebookSecret:       '%env(resolve:FACEBOOK_SECRET)%'
+            $facebookGraphVersion: '%env(resolve:FACEBOOK_GRAPH_VERSION)%'
 
     App\:
         resource: '../src/'
